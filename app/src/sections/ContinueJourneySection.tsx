@@ -65,7 +65,7 @@ const ContinueJourneySection = () => {
               }`}
               style={{ transitionDelay: `${340 + index * 120}ms` }}
             >
-              <a href={`/journal/${article.slug}`} className="block">
+              <a href={`/#/journal/${article.slug}`} className="block">
                 {/* Image */}
                 <div className="relative overflow-hidden aspect-[4/3] mb-6 border border-[#6f5930]/20 jewel-shine luxury-glow-hover">
                   <img

@@ -116,7 +116,7 @@ const Header = () => {
       label: entry.title,
       sectionIndex: 11,
       image: entry.heroImage,
-      href: `/journal/${entry.slug}`,
+      href: `/#/journal/${entry.slug}`,
       keywords: [entry.title.toLowerCase(), entry.slug.replace(/-/g, ' '), 'article', 'journal'],
     }));
 
@@ -141,8 +141,13 @@ const Header = () => {
       return;
     }
 
-    if (window.location.pathname !== '/') {
-      window.location.href = '/';
+    const hash = window.location.hash || '#/';
+    if (!hash.startsWith('#/')) {
+      window.location.href = '/#/';
+      return;
+    }
+    if (hash.startsWith('#/journal/')) {
+      window.location.href = '/#/';
     }
   };
 

@@ -27,7 +27,7 @@ const JournalDetailPage = ({ entry }: JournalDetailPageProps) => {
                 {entry.shortDescription}
               </p>
               <a
-                href="/"
+                href="/#/"
                 className="inline-block mt-10 text-xs tracking-[0.24em] text-[#d8ba7d] hover:text-[#f4e7cb] transition-colors duration-500"
               >
                 RETURN TO MAISON

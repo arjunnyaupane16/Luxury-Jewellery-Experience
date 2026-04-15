@@ -15,11 +15,20 @@ import RoseVideoSection from './sections/RoseVideoSection';
 import ContinueJourneySection from './sections/ContinueJourneySection';
 import JournalDetailPage from './pages/JournalDetailPage';
 import { journalEntryBySlug } from './data/journalEntries';
+import { useEffect, useState } from 'react';
 
 function App() {
-  const path = window.location.pathname;
-  const isJournal = path.startsWith('/journal/');
-  const slug = isJournal ? path.replace('/journal/', '') : '';
+  const [route, setRoute] = useState(() => window.location.hash || '#/');
+
+  useEffect(() => {
+    const onHashChange = () => setRoute(window.location.hash || '#/');
+    window.addEventListener('hashchange', onHashChange);
+    return () => window.removeEventListener('hashchange', onHashChange);
+  }, []);
+
+  const normalizedRoute = route.startsWith('#') ? route.slice(1) : route;
+  const isJournal = normalizedRoute.startsWith('/journal/');
+  const slug = isJournal ? normalizedRoute.replace('/journal/', '') : '';
   const entry = isJournal ? journalEntryBySlug(slug) : undefined;
 
   return (
@@ -33,7 +42,7 @@ function App() {
             <div className="text-center">
               <h1 className="font-display text-3xl text-[#f4e7cb] tracking-[0.16em]">ENTRY NOT FOUND</h1>
               <a
-                href="/"
+                href="/#/"
                 className="inline-block mt-8 text-xs tracking-[0.22em] text-[#d8ba7d] hover:text-[#f4e7cb] transition-colors duration-500"
               >
                 RETURN TO MAISON
